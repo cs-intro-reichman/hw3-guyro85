@@ -25,43 +25,92 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = x1;
+		if (x2 > 0){
+			for (int i = 0; i < x2; i++){
+				sum++;
+			}
+		}
+		else{
+			for (int i = 0; i < x2; i++){
+				sum--;
+			}
+		}
+		return sum;
 	}
 
 	// Returns x1 - x2
-	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+	public static int minus(int x1, int x2) {	
+		int sum = x1;
+		if (x2 > 0){
+			for (int i = 0; i < x2; i++){
+				sum--;
+			}
+		}
+		else{
+			for (int i = 0; i < x2; i++){
+				sum++;
+			}
+		}
+		return sum;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-        // Replace the following statement with your code
-		return 0;
+        int sum = 0;
+		if (x2 > 0){
+			for (int i = 0; i < x2; i++){
+				sum = plus(sum, x1);
+			}
+		}
+		else{
+			for (int i = 0; i < x2; i++){
+				sum = minus(sum, x1);
+			}
+		}
+		return sum;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = x;
+		if (n > 1){
+			for (int i = 1; i < n; i++){
+				sum = times(sum, x);
+			}
+		}
+		else{
+			sum = 0; // the integer part will always be a 0 if the power is negative
+		}
+		return sum;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-        // Replace the following statement with your code
-		return 0;
+        int divisor = 1;
+		double epsilon = x2;
+		while (Math.abs(minus(times(divisor, x2), x1)) >= epsilon || divisor > x1){
+			divisor++;
+		}
+
+		return divisor;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-        // Replace the following statement with your code
-		return 0;
+		int mod = 0;
+        if (x2 > 0){
+			mod = minus(x1, times(x2, div(x1, x2)));
+		}
+		return mod;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-        // Replace the following statement with your code
-		return 0;
+        int g = 1;
+		while (times(g, g) <= x) {
+			g++;
+		}
+		return minus(g, 1);
 	}	  	  
 }
