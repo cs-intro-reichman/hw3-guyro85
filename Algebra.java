@@ -9,7 +9,7 @@ public class Algebra {
 	    System.out.println(plus(2,3));   // 2 + 3
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
- 		System.out.println(times(3,4));  // 3 * 4
+ 		System.out.println(times(1,1));  // 3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
@@ -32,7 +32,7 @@ public class Algebra {
 			}
 		}
 		else{
-			for (int i = 0; i < x2; i++){
+			for (int i = 0; i < Math.abs(x2); i++){
 				sum--;
 			}
 		}
@@ -48,7 +48,7 @@ public class Algebra {
 			}
 		}
 		else{
-			for (int i = 0; i < x2; i++){
+			for (int i = 0; i < Math.abs(x2); i++){
 				sum++;
 			}
 		}
@@ -58,13 +58,13 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
         int sum = 0;
-		if (x2 > 0){
-			for (int i = 0; i < x2; i++){
+		if ((x1 >= 0 && x2 >= 0) || (x1 < 0 && x2 < 0)){
+			for (int i = 0; i < Math.abs(x2); i++){
 				sum = plus(sum, x1);
 			}
 		}
 		else{
-			for (int i = 0; i < x2; i++){
+			for (int i = 0; i < Math.abs(x2); i++){
 				sum = minus(sum, x1);
 			}
 		}
@@ -79,8 +79,14 @@ public class Algebra {
 				sum = times(sum, x);
 			}
 		}
+		else if(sum == 1){
+			return sum; 
+		}
+		else if(sum == 0){
+			sum = 1; 
+		}
 		else{
-			sum = 0; // the integer part will always be a 0 if the power is negative
+			sum = 0;
 		}
 		return sum;
 	}
