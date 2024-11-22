@@ -9,7 +9,7 @@ public class Algebra {
 	    System.out.println(plus(2,3));   // 2 + 3
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
- 		System.out.println(times(1,1));  // 3 * 4
+ 		System.out.println(times(-2,3));  // 3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
@@ -58,15 +58,13 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
         int sum = 0;
-		if ((x1 >= 0 && x2 >= 0) || (x1 < 0 && x2 < 0)){
-			for (int i = 0; i < Math.abs(x2); i++){
-				sum = plus(sum, x1);
-			}
+		int newSum = 0;
+		for (int i = 0; i < Math.abs(x2); i++){
+			sum = plus(sum, Math.abs(x1));
 		}
-		else{
-			for (int i = 0; i < Math.abs(x2); i++){
-				sum = minus(sum, x1);
-			}
+		if (!((x1 >= 0 && x2 >= 0) || (x1 < 0 && x2 < 0))){
+			newSum = minus(0, sum);
+			return newSum;
 		}
 		return sum;
 	}
@@ -94,9 +92,11 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
         int divisor = 1;
-		double epsilon = x2;
-		while (Math.abs(minus(times(divisor, x2), x1)) >= epsilon || divisor > x1){
+		while (Math.abs(minus(times(divisor, Math.abs(x2)), Math.abs(x1))) >= Math.abs(x2) || divisor > Math.abs(x1)){
 			divisor++;
+		}
+		if((x1 < 0) != (x2 < 0)){
+			divisor = minus(0, divisor);
 		}
 
 		return divisor;
